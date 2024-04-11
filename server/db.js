@@ -1,16 +1,16 @@
 const envelopes = [
   {
-    id: 1,
+    id: "1",
     category: "Groceries",
     budget: 20000,
   },
   {
-    id: 2,
+    id: "2",
     category: "Bills",
     budget: 5000,
   },
   {
-    id: 3,
+    id: "3",
     category: "Savings",
     budget: 30000,
   },
@@ -33,9 +33,8 @@ const isValidEnvelope = (instance) => {
   return true;
 }
 
-
 const getAllEnvelope = () => envelopes;
-const getEnvelope = (id) => envelopes.find(x => x.id === id);
+const getEnvelopeById = (id) => envelopes.find(x => x.id === id);
 
 const addEnvelope = (instance) => {
   const id = Date.now();
@@ -49,6 +48,6 @@ const addEnvelope = (instance) => {
 
 module.exports = { 
   getAllEnvelope,
-  getEnvelope,
+  getEnvelopeById,
   addEnvelope
 }
