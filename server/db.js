@@ -46,8 +46,36 @@ const addEnvelope = (instance) => {
   }
 }
 
+const updateEnvelope = (id, instance) => {
+  const instanceIndex = envelopes.findIndex((element) => {
+    return element.id === id;
+  });
+
+  if (instanceIndex > -1 && isValidEnvelope(instance)) {
+    envelopes[instanceIndex] = { id, ...instance };
+    return envelopes[instanceIndex];
+  } else {
+    return null;
+  }
+}
+
+const deleteEnvelopebyId = (id) => {
+  let index = envelopes.findIndex((element) => {
+    return element.id === id;
+  });
+
+  if (index !== -1) {
+    envelopes.splice(index, 1);
+    return true;
+  } else {
+    return false;
+  }
+}
+
 module.exports = { 
   getAllEnvelope,
   getEnvelopeById,
-  addEnvelope
+  addEnvelope,
+  updateEnvelope,
+  deleteEnvelopebyId
 }
