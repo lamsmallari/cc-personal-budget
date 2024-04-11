@@ -4,21 +4,23 @@ Using [Envelope Budgeting principles](https://www.thebalancemoney.com/what-is-en
 
 ### GET
 **/api** 
-Get all envelopes
+Get all envelopes.
+
 **/api/:envelopeId** 
-Get specific envelope by ID
+Get specific envelope by ID.
 
 ### POST
 **/api** 
-Adds new envelope, body schema:
+Adds new envelope.
 ```
 {
   "category": "Bills",
   "budget": 100,
 }
 ```
+
 **/api/transfer/:from/:to** 
-Transfer budget from an envelope to another envelope's budget, body schema:
+Transfer budget from an envelope to another envelope's budget.
 ```
 {
   "budget": 100,
@@ -27,7 +29,7 @@ Transfer budget from an envelope to another envelope's budget, body schema:
 
 ### PUT
 **/api/:envelopeId** 
-Edit an envelope, body schema:
+Edit an envelope.
 
 ### DELETE
 **/api/:envelopeId** 
