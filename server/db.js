@@ -38,7 +38,7 @@ const getEnvelopeById = (id) => envelopes.find(x => x.id === id);
 
 const addEnvelope = (instance) => {
   const id = Date.now();
-  const newEnvelope = { id, ...instance}
+  const newEnvelope = { id, ...instance }
 
   if(isValidEnvelope(newEnvelope)) {
     envelopes.push(newEnvelope);
@@ -54,6 +54,23 @@ const updateEnvelope = (id, instance) => {
   if (instanceIndex > -1 && isValidEnvelope(instance)) {
     envelopes[instanceIndex] = { id, ...instance };
     return envelopes[instanceIndex];
+  } else {
+    return null;
+  }
+}
+
+const transferBudget = (fromEnvelop, toEnvelope, budget) => {
+  const fromEnvelopIndex = envelopes.findIndex((element) => element.id === fromEnvelop.id);
+  const toEnvelopeIndex = envelopes.findIndex((element) => element.id === toEnvelope.id);
+
+  if (fromEnvelopIndex > -1 && toEnvelopeIndex > -1 && isValidEnvelope(fromEnvelop) && isValidEnvelope(toEnvelope)) {
+    envelopes[fromEnvelopIndex] = { ...fromEnvelop, budget: fromEnvelop.budget - Number(budget)}
+    envelopes[toEnvelopeIndex] = { ...toEnvelope, budget: toEnvelope.budget + Number(budget)}
+
+    return [
+      envelopes[fromEnvelopIndex],
+      envelopes[toEnvelopeIndex],
+    ];
   } else {
     return null;
   }
@@ -77,5 +94,6 @@ module.exports = {
   getEnvelopeById,
   addEnvelope,
   updateEnvelope,
-  deleteEnvelopebyId
+  deleteEnvelopebyId,
+  transferBudget
 }
