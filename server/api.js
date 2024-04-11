@@ -73,6 +73,11 @@ apiRouter.post("/", validateInstance, (req, res, next) => {
   res.status(201).send(addEnvelope(newEnvelope));
 });
 
+apiRouter.post('/transfer/:from/:to', validateBudget, (req, res) => {
+  res.send(transferBudget(req.from, req.to, req.body.budget));
+});
+
+
 apiRouter.put("/:envelopeId", validateInstance, (req, res, next) => {
   const modifiedEnvelope = req.body;
   res.send(updateEnvelope(req.params.envelopeId, modifiedEnvelope));
@@ -80,11 +85,6 @@ apiRouter.put("/:envelopeId", validateInstance, (req, res, next) => {
 
 apiRouter.delete("/:envelopeId", (req, res, next) => {
   res.status(204).send(deleteEnvelopebyId(req.envelope.id));
-});
-
-// Route handlers
-apiRouter.post('/transfer/:from/:to', validateBudget, (req, res) => {
-  res.send(transferBudget(req.from, req.to, req.body.budget));
 });
 
 module.exports = apiRouter;
