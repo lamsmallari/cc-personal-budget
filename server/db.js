@@ -62,12 +62,8 @@ const updateEnvelope = (id, instance) => {
 };
 
 const transferBudget = (fromEnvelop, toEnvelope, budget) => {
-  const fromEnvelopRef = envelopes.find(
-    (element) => element.id === fromEnvelop.id
-  );
-  const toEnvelopeRef = envelopes.find(
-    (element) => element.id === toEnvelope.id
-  );
+  const fromEnvelopRef = getEnvelopeById(fromEnvelop.id);
+  const toEnvelopeRef = getEnvelopeById(toEnvelope.id);
 
   if (
     fromEnvelopRef &&
