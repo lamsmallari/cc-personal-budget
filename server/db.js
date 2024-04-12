@@ -77,9 +77,9 @@ const transferBudget = (fromEnvelop, toEnvelope, budget) => {
     toEnvelopeRef.budget = toEnvelope.budget + Number(budget);
 
     return [fromEnvelopRef, toEnvelopeRef];
-  } else {
-    return null;
-  }
+  } 
+  
+  return null;
 };
 
 const deleteEnvelopebyId = (id) => {
