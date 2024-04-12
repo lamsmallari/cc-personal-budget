@@ -14,37 +14,37 @@ const envelopes = [
     category: "Savings",
     budget: 30000,
   },
-]
+];
 
 const isValidEnvelope = (instance) => {
-  instance.category = instance.category || '';
-  instance.budget = instance.budget || '';
+  instance.category = instance.category || "";
+  instance.budget = instance.budget || "";
 
-  if (typeof instance.category !== 'string') {
-    throw new Error('Envelope\'s category must be strings');
+  if (typeof instance.category !== "string") {
+    throw new Error("Envelope's category must be strings");
   }
 
   if (!isNaN(parseFloat(instance.budget)) && isFinite(instance.budget)) {
     instance.budget = Number(instance.budget);
   } else {
-    throw new Error('Envelope\'s budget must be a number.');
+    throw new Error("Envelope's budget must be a number.");
   }
 
   return true;
-}
+};
 
 const getAllEnvelope = () => envelopes;
-const getEnvelopeById = (id) => envelopes.find(x => x.id === id);
+const getEnvelopeById = (id) => envelopes.find((x) => x.id === id);
 
 const addEnvelope = (instance) => {
   const id = Date.now();
-  const newEnvelope = { id, ...instance }
+  const newEnvelope = { id, ...instance };
 
-  if(isValidEnvelope(newEnvelope)) {
+  if (isValidEnvelope(newEnvelope)) {
     envelopes.push(newEnvelope);
     return envelopes[envelopes.length - 1];
   }
-}
+};
 
 const updateEnvelope = (id, instance) => {
   const instanceIndex = envelopes.findIndex((element) => {
@@ -57,24 +57,30 @@ const updateEnvelope = (id, instance) => {
   } else {
     return null;
   }
-}
+};
 
 const transferBudget = (fromEnvelop, toEnvelope, budget) => {
-  const fromEnvelopIndex = envelopes.findIndex((element) => element.id === fromEnvelop.id);
-  const toEnvelopeIndex = envelopes.findIndex((element) => element.id === toEnvelope.id);
+  const fromEnvelopRef = envelopes.find(
+    (element) => element.id === fromEnvelop.id
+  );
+  const toEnvelopeRef = envelopes.find(
+    (element) => element.id === toEnvelope.id
+  );
 
-  if (fromEnvelopIndex > -1 && toEnvelopeIndex > -1 && isValidEnvelope(fromEnvelop) && isValidEnvelope(toEnvelope)) {
-    envelopes[fromEnvelopIndex] = { ...fromEnvelop, budget: fromEnvelop.budget - Number(budget)}
-    envelopes[toEnvelopeIndex] = { ...toEnvelope, budget: toEnvelope.budget + Number(budget)}
+  if (
+    fromEnvelopRef &&
+    toEnvelopeRef &&
+    isValidEnvelope(fromEnvelop) &&
+    isValidEnvelope(toEnvelope)
+  ) {
+    fromEnvelopRef.budget = fromEnvelop.budget - Number(budget);
+    toEnvelopeRef.budget = toEnvelope.budget + Number(budget);
 
-    return [
-      envelopes[fromEnvelopIndex],
-      envelopes[toEnvelopeIndex],
-    ];
+    return [fromEnvelopRef, toEnvelopeRef];
   } else {
     return null;
   }
-}
+};
 
 const deleteEnvelopebyId = (id) => {
   let index = envelopes.findIndex((element) => {
@@ -87,13 +93,13 @@ const deleteEnvelopebyId = (id) => {
   } else {
     return false;
   }
-}
+};
 
-module.exports = { 
+module.exports = {
   getAllEnvelope,
   getEnvelopeById,
   addEnvelope,
   updateEnvelope,
   deleteEnvelopebyId,
-  transferBudget
-}
+  transferBudget,
+};
