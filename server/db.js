@@ -1,3 +1,5 @@
+const { isFloatNumber } = require("../utils/number-utils");
+
 const envelopes = [
   {
     id: "1",
@@ -24,7 +26,7 @@ const isValidEnvelope = (instance) => {
     throw new Error("Envelope's category must be strings");
   }
 
-  if (!isNaN(parseFloat(instance.budget)) && isFinite(instance.budget)) {
+  if (isFloatNumber(instance.budget)) {
     instance.budget = Number(instance.budget);
   } else {
     throw new Error("Envelope's budget must be a number.");
